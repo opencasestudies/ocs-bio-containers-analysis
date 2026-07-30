@@ -6,7 +6,7 @@ library(readr)
 
 load(here::here("data", "imported", "raw_table1.rda"))
 
-
+#wrangle the data
 table1_extract <- raw_table %>%
     rename(c("dataset_name" = "X1",
              "ref" = "X2",
@@ -35,6 +35,7 @@ table1_extract <- raw_table %>%
               cohort_description_num_paired_samples,
               cohort_description_text))
 
+#output information about the extracted data
 message("Dimensions: ", paste(dim(table1_extract), collapse = " x "))
 message(table1_extract[4, "dataset_name"])
 

@@ -1,4 +1,8 @@
+#!/usr/bin/env Rscript
+
 load(here::here("data", "wrangled", "wrangled_data.rda"))
+
+#HMDB plot
 
 hmdb_scatter <- table1_extract %>%
   mutate(longitudinal = factor(longitudinal, levels = c("No", "Yes"))) %>%
@@ -26,6 +30,8 @@ if (!dir.exists(output_dir)) {
 
 ggsave(here::here(paste0(output_dir, "hmdb_scatter.png")))
 
+#KEGG plot
+
 kegg_scatter <- table1_extract %>%
   mutate(longitudinal = factor(longitudinal, levels = c("No", "Yes"))) %>%
   ggplot(aes(x = num_paired_samples,
@@ -43,4 +49,11 @@ kegg_scatter <- table1_extract %>%
   theme_minimal(base_size = 12) +
   coord_fixed(ratio = 1)
 
+#save the plot
+
 ggsave(here::here(paste0(output_dir, "kegg_scatter.png")))
+
+#save the plot ggplot objects
+save(hmdb_scatter, kegg_scatter,
+     file = here::here(paste0(output_dir, 
+                              "scatter_plots.rda")))
