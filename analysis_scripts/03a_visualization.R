@@ -1,6 +1,12 @@
 #!/usr/bin/env Rscript
 
+library(here)
+library(tidyverse)
+library(ggplot2)
+
 load(here::here("data", "wrangled", "wrangled_data.rda"))
+
+message("Dimensions: ", paste(dim(table1_extract), collapse = " x "))
 
 #HMDB plot
 
@@ -28,7 +34,9 @@ if (!dir.exists(output_dir)) {
   dir.create(output_dir, recursive = TRUE)
 }
 
-ggsave(here::here(paste0(output_dir, "hmdb_scatter.png")))
+ggsave(here::here(output_dir, "hmdb_scatter.png"))
+
+message("HMDB plot completed")
 
 #KEGG plot
 
@@ -50,10 +58,12 @@ kegg_scatter <- table1_extract %>%
   coord_fixed(ratio = 1)
 
 #save the plot
+ggsave(here::here(output_dir, "kegg_scatter.png"))
 
-ggsave(here::here(paste0(output_dir, "kegg_scatter.png")))
+
+message("KEGG plot completed")
 
 #save the plot ggplot objects
 save(hmdb_scatter, kegg_scatter,
-     file = here::here(paste0(output_dir, 
-                              "scatter_plots.rda")))
+     file = here::here(output_dir, 
+                              "scatter_plots.rda"))

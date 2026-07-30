@@ -46,8 +46,8 @@ if (!dir.exists(output_dir)) {
   dir.create(output_dir, recursive = TRUE)
 }
 
-save(table1_extract, file = here::here(paste0(output_dir,
-                                       "wrangled_data.rda")))
+save(table1_extract, file = here::here(output_dir,
+                                       "wrangled_data.rda"))
 readr::write_csv(table1_extract,
-                 file = here::here(paste0(output_dir,
-                                   "wrangled_data.csv")))
+                 file = here::here(output_dir,
+                                   "wrangled_data.csv"))
