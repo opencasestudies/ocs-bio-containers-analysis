@@ -12,8 +12,8 @@ raw_table <- tabulapdf::extract_tables("https://www.nature.com/articles/s41522-0
                                       )[[1]]
 
 #output information about the extracted data
-message("Dimensions: ", paste(dim(raw_table), collapse = " x "))
-message("Number of NAs: ", sum(is.na(raw_table)))
+cat("Dimensions: ", paste(dim(raw_table), collapse = " x "), "\n")
+cat("Number of NAs: ", sum(is.na(raw_table)), "\n")
 
 #save the data
 output_dir <- here::here("data", "imported")

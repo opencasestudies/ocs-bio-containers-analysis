@@ -6,7 +6,7 @@ library(ggplot2)
 
 load(here::here("data", "wrangled", "wrangled_data.rda"))
 
-message("Dimensions: ", paste(dim(table1_extract), collapse = " x "))
+cat("Dimensions: ", paste(dim(table1_extract), collapse = " x "), "\n")
 
 #HMDB plot
 
@@ -18,8 +18,7 @@ hmdb_scatter <- table1_extract %>%
              label = dataset_name)) +
   geom_point(size = 2.5) +
   geom_text(vjust = -0.5, size = 2.8, color = "black") +
-  scale_color_manual(values = c("No" = "#D27D2D",
-                                "Yes" = "#1D6F8A"), drop = FALSE) +
+  scale_color_viridis_d(end = 0.6) +
   labs(title = "Paired sample count vs HMDB annotation coverage",
        x = "No. samples with paired data",
        y = "HMDB Annotated compounds",
@@ -36,7 +35,7 @@ if (!dir.exists(output_dir)) {
 
 ggsave(here::here(output_dir, "hmdb_scatter.png"))
 
-message("HMDB plot completed")
+cat("HMDB plot completed\n")
 
 #KEGG plot
 
@@ -48,8 +47,7 @@ kegg_scatter <- table1_extract %>%
              label = dataset_name)) +
   geom_point(size = 2.5) +
   geom_text(vjust = -0.5, size = 2.8, color = "black") +
-  scale_color_manual(values = c("No" = "#D27D2D",
-                                "Yes" = "#1D6F8A"), drop = FALSE) +
+  scale_color_viridis_d(end = 0.6) +
   labs(title = "Paired sample count vs KEGG annotation coverage",
        x = "No. samples with paired data",
        y = "KEGG Annotated compounds",
@@ -61,7 +59,7 @@ kegg_scatter <- table1_extract %>%
 ggsave(here::here(output_dir, "kegg_scatter.png"))
 
 
-message("KEGG plot completed")
+cat("KEGG plot completed\n")
 
 #save the plot ggplot objects
 save(hmdb_scatter, kegg_scatter,

@@ -18,4 +18,4 @@ Rscript 03b_visualization_patchwork.R >> ../results/logs/visualization_logs.txt
 
 echo "Process complete"
 
-Rscript -e 'sessionInfo()' >> ../results/logs/session_info.txt
+Rscript -e 'library(here); library(tabulapdf); library(tidyverse); library(readr); library(ggplot2); library(patchwork); sessionInfo()' >> ../results/logs/session_info.txt
