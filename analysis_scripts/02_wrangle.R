@@ -36,8 +36,9 @@ table1_extract <- raw_table %>%
               cohort_description_text))
 
 #output information about the extracted data
-message("Dimensions: ", paste(dim(table1_extract), collapse = " x "))
-message(table1_extract[4, "dataset_name"])
+cat("Dimensions: ", paste(dim(table1_extract), collapse = " x "), "\n")
+cat("Number of NAs: ", sum(is.na(table1_extract)), "\n")
+cat("Dataset Name (Row 4): ", unlist(table1_extract[4, "dataset_name"]), "\n")
 
 #save the data
 output_dir <- here::here("data", "wrangled")
@@ -46,8 +47,8 @@ if (!dir.exists(output_dir)) {
   dir.create(output_dir, recursive = TRUE)
 }
 
-save(table1_extract, file = here::here(paste0(output_dir,
-                                       "wrangled_data.rda")))
+save(table1_extract, file = here::here(output_dir,
+                                       "wrangled_data.rda"))
 readr::write_csv(table1_extract,
-                 file = here::here(paste0(output_dir,
-                                   "wrangled_data.csv")))
+                 file = here::here(output_dir,
+                                   "wrangled_data.csv"))

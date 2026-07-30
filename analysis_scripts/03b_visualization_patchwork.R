@@ -1,11 +1,11 @@
 #!/usr/bin/env Rscript
 
+library(here)
 library(tidyverse)
 library(ggplot2)
 library(patchwork)
-library(here)
 
-load(here::here("outputs", "plots", "scatter_plots.rda"))
+load(here::here("results", "plots", "scatter_plots.rda"))
 
 hmdb_scatter + labs(title = NULL) +
   kegg_scatter +  labs(title = NULL) +
@@ -19,4 +19,4 @@ if (!dir.exists(output_dir)) {
   dir.create(output_dir, recursive = TRUE)
 }
 
-ggsave(here::here(paste0(output_dir, "combined_scatter.png")))
+ggsave(here::here(output_dir, "combined_scatter.png"))
