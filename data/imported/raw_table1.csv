@@ -1,0 +1,26 @@
+X1,X2,X3,X4,X5,X6,X7
+YACHIDA_CRC_2019,8,Patients with colonoscopy findings from 347,NA,No,407,431
+NA,NA,"normal to stage 4 CRC, and controls",NA,NA,NA,NA
+FRANZOSA_IBD_2019,9,IBD patients and controls (PRISM cohort) 220,NA,No,199,174
+SINHA_CRC_2016,21,CRC patients and controls 131,NA,No,352,189
+HE_INFANTS_MFGM_2019,14,Infants on different diets during their 1st 277,NA,Yes,118,111
+NA,NA,year of life,NA,NA,NA,NA
+iHMP_IBDMDB_2019,15,HMP2 (iHMP) cohort: Longitudinal 389,NA,Yes,455,276
+NA,NA,samples from IBD patients and controls,NA,NA,NA,NA
+JACOBS_IBD_2016,16,IBD patients and their first degree 90,NA,No,36,27
+NA,NA,(healthy) relatives,NA,NA,NA,NA
+POYET_BIO_ML_2019,20,Longitudinal samples from healthy BIO- 164,NA,Yes,255,223
+NA,NA,ML (stool bank) donors,NA,NA,NA,NA
+ERAWIJANTARI_GC_2020,13,Patients with a history of gastrectomy for 96,NA,No,462,505
+NA,NA,"GC, and controls",NA,NA,NA,NA
+KIM_ADENOMAS,18,Patients with advanced colorectal 240,NA,No,358,262
+NA,NA,"adenomas, CRC, and controls",NA,NA,NA,NA
+MARS_IBS_2020,19,Longitudinal samples from patients with 455,NA,Yes,40,36
+NA,NA,IBS and controls,NA,NA,NA,NA
+KANG_AUTISM_2018,17,Children with autism and neurotypical 44,NA,No,58,57
+NA,NA,children,NA,NA,NA,NA
+KOSTIC_INFANTS_T1D_2015,10,Longitudinal samples from children at risk 103,NA,Yes,138,130
+NA,NA,for T1D (DIABIMMUNE cohort),NA,NA,NA,NA
+WANDRO_PRETERMS_2018,22,Preterm infants during their first 6 months 75,NA,Yes,198,199
+NA,NA,of life. Some developed LOS/NEC,NA,NA,NA,NA
+WANG_ESRD_2020,23,Adults with ESRD and controls 287,NA,No,148,87
