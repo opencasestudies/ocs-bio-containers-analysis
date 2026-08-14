@@ -1,2 +1,6 @@
 Dimensions:  25 x 7 
 Number of NAs:  80 
+Dimensions:  25 x 7 
+Number of NAs:  80 
+Dimensions:  25 x 7 
+Number of NAs:  80 
