@@ -90,7 +90,7 @@ jobs:
 
       # CLEANUP: Delete the workspace from the prior import step
       - name: Delete intermediate artifact
-        uses: actions/delete-artifact@v5
+        uses: actions/delete-artifacts@v5
         with:
           name: analysis-workspace-import
 
@@ -138,7 +138,7 @@ jobs:
 
       # CLEANUP: Delete the workspace from the prior wrangling step
       - name: Delete intermediate artifact
-        uses: actions/delete-artifact@v5
+        uses: actions/delete-artifacts@v5
         with:
           name: analysis-workspace-wrangle
 
@@ -186,7 +186,7 @@ jobs:
 
       # CLEANUP: Delete the workspace from the prior viz step
       - name: Delete intermediate artifact
-        uses: actions/delete-artifact@v5
+        uses: actions/delete-artifacts@v5
         with:
           name: analysis-workspace-viz
 
@@ -238,7 +238,7 @@ jobs:
 
       # CLEANUP: Delete the workspace from the prior correlation analysis step
       - name: Delete intermediate artifact
-        uses: actions/delete-artifact@v5
+        uses: actions/delete-artifacts@v5
         with:
           name: analysis-workspace-analysis
 
@@ -273,6 +273,6 @@ jobs:
 
       # CLEANUP: Delete the workspace from the prior full process step
       - name: Delete intermediate artifact
-        uses: actions/delete-artifact@v5
+        uses: actions/delete-artifacts@v5
         with:
           name: analysis-workspace-full
