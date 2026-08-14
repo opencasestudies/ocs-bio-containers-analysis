@@ -163,8 +163,6 @@ jobs:
         with:
           name: analysis-workspace-analysis
           path: |
-            results/
-            data/
             import_results/
             import_data/
             wrangle_results/
@@ -189,6 +187,8 @@ jobs:
 
       - name: Setup output directories
         run: |
+          rm -r results
+          mkdir -p results/logs
           mkdir -p full_analysis_results full_analysis_data
 
       - name: Run full analysis script
