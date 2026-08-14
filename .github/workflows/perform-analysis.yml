@@ -16,7 +16,7 @@ jobs:
     name: Run import part of analysis
     runs-on: ubuntu-latest
     container: 
-      image: ocs-docker/ocs-bio-containers-base:main
+      image: bioocs/ocs-bio-containers-base:main
 
     steps:
       - name: Checkout repository
@@ -44,7 +44,7 @@ jobs:
     name: Run through wrangling part of analysis
     runs-on: ubuntu-latest
     needs: run-import-analysis
-    container: ocs-docker/ocs-bio-containers-base:main
+    container: bioocs/ocs-bio-containers-base:main
 
     steps:
       - name: Checkout repository
@@ -78,7 +78,7 @@ jobs:
     name: Run through visualization part of analysis
     runs-on: ubuntu-latest
     needs: run-wrangle-analysis
-    container: ocs-docker/ocs-bio-containers_wrangling:main
+    container: bioocs/ocs-bio-containers_wrangling:main
 
     steps:
       - name: Checkout repository
@@ -113,7 +113,7 @@ jobs:
     name: Run through analysis part of analysis
     runs-on: ubuntu-latest
     needs: run-viz-analysis
-    container: ocs-docker/ocs-bio-containers_base:main
+    container: bioocs/ocs-bio-containers_base:main
 
     steps:
       - name: Checkout repository
@@ -149,7 +149,7 @@ jobs:
     name: Run full analysis
     needs: run-analysis-analysis
     runs-on: ubuntu-latest
-    container: ocs-docker/ocs-bio-containers-wrangling:main
+    container: bioocs/ocs-bio-containers-wrangling:main
 
     steps:
       - name: Checkout repository
@@ -186,12 +186,12 @@ jobs:
 #  run-continued-learning-analysis:
 #    name: Run Continued Learning Reinforcement Exercise Analysis
 #    runs-on: ubuntu-latest
-#    container: ocs-docker/ocs-bio-containers-cont:main
+#    container: bioocs/ocs-bio-containers-cont:main
 
 #  run-beginner-hw-analysis:
 #    name: Run Beginner Advancement Exercise Analysis
 #    runs-on: ubuntu-latest
-#    container: ocs-docker/ocs-bio-containers-beg:main
+#    container: bioocs/ocs-bio-containers-beg:main
 
   commit-results:
     runs-on: ubuntu-latest
