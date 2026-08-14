@@ -92,8 +92,8 @@ jobs:
       - name: Run data visualization and copy results
         run: |
           mkdir -p viz_results
-          Rscript 03a_visualization.R >> results/logs/visualization_logs.txt
-          Rscript 03b_visualization_patchwork.R >> results/logs/visualization_logs.txt
+          Rscript analysis_scripts/03a_visualization.R >> results/logs/visualization_logs.txt
+          Rscript analysis_scripts/03b_visualization_patchwork.R >> results/logs/visualization_logs.txt
           cp -r results/* viz_results/
 
       - name: Upload Workspace for visualization stage
@@ -127,7 +127,7 @@ jobs:
       - name: Run data analysis and copy results
         run: |
           mkdir -p analysis_results
-          Rscript 04_analysis_metric.R >> results/logs/analysis_logs.txt
+          Rscript analysis_scripts/04_analysis_metric.R >> results/logs/analysis_logs.txt
           cp -r results/* analysis_results/
 
       - name: Upload Workspace for analysis stage
