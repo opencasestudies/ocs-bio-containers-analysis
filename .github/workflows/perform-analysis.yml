@@ -1,0 +1,213 @@
+# Kate Isaac Aug 2026
+
+name: Run Analysis in Specified Container
+
+on: 
+  push
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-import-analysis:
+    name: Run import part of analysis
+    runs-on: ubuntu-latest
+    container: 
+      image: ocs-docker/ocs-bio-containers-base:main
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run data import and copy results
+        run: |
+          mkdir -p import_results import_data
+          mkdir -p results/logs
+          Rscript analysis_scripts/01_extract_data.R >> results/logs/data_extraction_logs.txt
+          cp -r results/* import_results/
+          cp -r data/* import_data/
+
+      - name: Upload Workspace for import stage
+        uses: actions/upload-artifact@v4
+        with:
+          name: analysis-workspace-import
+          path: |
+            results/
+            data/
+            import_results/
+            import_data/
+
+  run-wrangle-analysis: 
+    name: Run through wrangling part of analysis
+    runs-on: ubuntu-latest
+    needs: run-import-analysis
+    container: ocs-docker/ocs-bio-containers-base:main
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download Workspace from Data Import
+        uses: actions/download-artifact@v4
+        with:
+          name: analysis-workspace-import
+
+      - name: Run data wrangling and copy results
+        run: |
+          mkdir -p wrangle_results wrangle_data
+          Rscript analysis_scripts/02_wrangle.R >> results/logs/wrangling_logs.txt
+          cp -r results/* wrangle_results/
+          cp -r data/* wrangle_data/
+
+      - name: Upload Workspace for wrangling stage
+        uses: actions/upload-artifact@v4
+        with:
+          name: analysis-workspace-wrangle
+          path:
+            results/
+            data/
+            import_results/
+            import_data/
+            wrangle_results/
+            wrangle_data/
+
+  run-viz-analysis:
+    name: Run through visualization part of analysis
+    runs-on: ubuntu-latest
+    needs: run-wrangle-analysis
+    container: ocs-docker/ocs-bio-containers_wrangling:main
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Download Workspace from Data Wrangling
+        uses: actions/download-artifact@v4
+        with:
+          name: analysis-workspace-wrangle
+
+      - name: Run data visualization and copy results
+        run: |
+          mkdir -p viz_results
+          Rscript 03a_visualization.R >> results/logs/visualization_logs.txt
+          Rscript 03b_visualization_patchwork.R >> results/logs/visualization_logs.txt
+          cp -r results/* viz_results/
+
+      - name: Upload Workspace for visualization stage
+        uses: actions/upload-artifact@v4
+        with:
+          name: analysis-workspace-viz
+          path:
+            results/
+            data/
+            import_results/
+            import_data/
+            wrangle_results/
+            wrangle_data/
+            viz_results/
+
+  run-analysis-analysis:
+    name: Run through analysis part of analysis
+    runs-on: ubuntu-latest
+    needs: run-viz-analysis
+    container: ocs-docker/ocs-bio-containers_base:main
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Download Workspace from Data Viz
+        uses: actions/download-artifact@v4
+        with:
+          name: analysis-workspace-viz
+
+      - name: Run data analysis and copy results
+        run: |
+          mkdir -p analysis_results
+          Rscript 04_analysis_metric.R >> results/logs/analysis_logs.txt
+          cp -r results/* analysis_results/
+
+      - name: Upload Workspace for analysis stage
+        uses: actions/upload-artifact@v4
+        with:
+          name: analysis-workspace-analysis
+          path:
+            results/
+            data/
+            import_results/
+            import_data/
+            wrangle_results/
+            wrangle_data/
+            viz_results/
+            analysis_results/
+
+
+  run-full-analysis:
+    name: Run full analysis
+    needs: run-analysis-analysis
+    runs-on: ubuntu-latest
+    container: ocs-docker/ocs-bio-containers-wrangling:main
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download Workspace from Data Analysis
+        uses: actions/download-artifact@v4
+        with:
+          name: analysis-workspace-analysis
+
+      - name: Run full analysis script
+        run: |
+          mkdir - p full_analysis_results full_analysis_data
+          bash analysis_scripts/run_analysis.sh
+          cp -r results/* full_analysis_results/
+          cp -r data/* full_analysis_data/
+
+      - name: Upload Workspace for Full Analysis stage
+        uses: actions/upload-artifact@v4
+        with:
+          name: analysis-workspace-full
+          path:
+            results/
+            data/
+            import_results/
+            import_data/
+            wrangle_results/
+            wrangle_data/
+            viz_results/
+            analysis_results/
+            full_analysis_results/
+            full_analysis_data/
+
+#  run-continued-learning-analysis:
+#    name: Run Continued Learning Reinforcement Exercise Analysis
+#    runs-on: ubuntu-latest
+#    container: ocs-docker/ocs-bio-containers-cont:main
+
+#  run-beginner-hw-analysis:
+#    name: Run Beginner Advancement Exercise Analysis
+#    runs-on: ubuntu-latest
+#    container: ocs-docker/ocs-bio-containers-beg:main
+
+  commit-results:
+    runs-on: ubuntu-latest
+    needs: run-full-analysis
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download Final Workspace
+        uses: actions/download-artifact@v4
+        with:
+          name: analysis-workspace-full
+
+      - name: Commit and push all results
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-run and update results from multi-stage and multi-container analyses"
+          file_pattern: "results/ data/ import_results/ import_data/ wrangle_results/ wrangle_data/ viz_results/ analysis_results/ full_analysis_results/ full_analysis_data/"
