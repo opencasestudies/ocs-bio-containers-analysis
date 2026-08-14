@@ -30,7 +30,7 @@ jobs:
       - name: Run data import
         working-directory: ./analysis_scripts
         run: |
-          Rscript 01_extract_data.R >> ../results/logs/data_extraction_logs.txt
+          Rscript 01_extract_data.R > ../results/logs/data_extraction_logs.txt
       
       - name: Copy results
         run: |
@@ -69,7 +69,7 @@ jobs:
       - name: Run data wrangling
         working-directory: ./analysis_scripts
         run: |
-          Rscript 02_wrangle.R >> ../results/logs/wrangling_logs.txt
+          Rscript 02_wrangle.R > ../results/logs/wrangling_logs.txt
 
       - name: Copy results
         run: |
@@ -110,7 +110,7 @@ jobs:
       - name: Run data visualization
         working-directory: ./analysis_scripts
         run: |
-          Rscript 03a_visualization.R >> ../results/logs/visualization_logs.txt
+          Rscript 03a_visualization.R > ../results/logs/visualization_logs.txt
           Rscript 03b_visualization_patchwork.R >> ../results/logs/visualization_logs.txt
       
       - name: Copy results
@@ -152,7 +152,7 @@ jobs:
       - name: Run data analysis
         working-directory: ./analysis_scripts
         run: |
-          Rscript 04_analysis_metric.R >> ../results/logs/analysis_logs.txt
+          Rscript 04_analysis_metric.R > ../results/logs/analysis_logs.txt
 
       - name: Copy results
         run: |

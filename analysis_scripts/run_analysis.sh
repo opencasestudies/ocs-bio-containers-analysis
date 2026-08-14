@@ -14,7 +14,7 @@ echo "Visualizing data"
 
 Rscript 03a_visualization.R > ../results/logs/visualization_logs.txt
 
-Rscript 03b_visualization_patchwork.R > ../results/logs/visualization_logs.txt
+Rscript 03b_visualization_patchwork.R >> ../results/logs/visualization_logs.txt
 
 echo "Analyzing data"
 
