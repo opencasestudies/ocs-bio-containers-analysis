@@ -211,7 +211,7 @@ jobs:
           mkdir -p full_analysis_results full_analysis_data
 
       - name: Run full analysis script
-        working-directory ./analysis_scripts
+        working-directory: ./analysis_scripts
         run: |
           bash run_analysis.sh
           
