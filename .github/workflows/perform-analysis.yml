@@ -87,13 +87,7 @@ jobs:
             import_data/
             wrangle_results/
             wrangle_data/
-
-      # CLEANUP: Delete the workspace from the prior import step
-      - name: Delete intermediate artifact
-        uses: actions/delete-artifacts@v5
-        with:
-          name: analysis-workspace-import
-
+            
   run-viz-analysis:
     name: Run through visualization part of analysis
     runs-on: ubuntu-latest
@@ -136,12 +130,6 @@ jobs:
             wrangle_data/
             viz_results/
 
-      # CLEANUP: Delete the workspace from the prior wrangling step
-      - name: Delete intermediate artifact
-        uses: actions/delete-artifacts@v5
-        with:
-          name: analysis-workspace-wrangle
-
   run-analysis-analysis:
     name: Run through analysis part of analysis
     runs-on: ubuntu-latest
@@ -183,13 +171,6 @@ jobs:
             wrangle_data/
             viz_results/
             analysis_results/
-
-      # CLEANUP: Delete the workspace from the prior viz step
-      - name: Delete intermediate artifact
-        uses: actions/delete-artifacts@v5
-        with:
-          name: analysis-workspace-viz
-
 
   run-full-analysis:
     name: Run full analysis
@@ -236,12 +217,6 @@ jobs:
             full_analysis_results/
             full_analysis_data/
 
-      # CLEANUP: Delete the workspace from the prior correlation analysis step
-      - name: Delete intermediate artifact
-        uses: actions/delete-artifacts@v5
-        with:
-          name: analysis-workspace-analysis
-
 #  run-continued-learning-analysis:
 #    name: Run Continued Learning Reinforcement Exercise Analysis
 #    runs-on: ubuntu-latest
@@ -270,9 +245,3 @@ jobs:
         with:
           commit_message: "Auto-run and update results from multi-stage and multi-container analyses"
           file_pattern: "results/ data/ import_results/ import_data/ wrangle_results/ wrangle_data/ viz_results/ analysis_results/ full_analysis_results/ full_analysis_data/"
-
-      # CLEANUP: Delete the workspace from the prior full process step
-      - name: Delete intermediate artifact
-        uses: actions/delete-artifacts@v5
-        with:
-          name: analysis-workspace-full
