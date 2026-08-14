@@ -3,7 +3,7 @@
 name: Run Analysis in Specified Container
 
 on: 
-  push
+  push:
     branches:
       - main
   workflow_dispatch:
