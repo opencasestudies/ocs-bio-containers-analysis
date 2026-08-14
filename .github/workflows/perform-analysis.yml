@@ -66,7 +66,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: analysis-workspace-wrangle
-          path:
+          path: |
             results/
             data/
             import_results/
@@ -100,7 +100,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: analysis-workspace-viz
-          path:
+          path: |
             results/
             data/
             import_results/
@@ -134,7 +134,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: analysis-workspace-analysis
-          path:
+          path: |
             results/
             data/
             import_results/
@@ -171,7 +171,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: analysis-workspace-full
-          path:
+          path: |
             results/
             data/
             import_results/
