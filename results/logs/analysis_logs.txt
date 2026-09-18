@@ -10,9 +10,3 @@ Number of datasets per variable in correlation analysis ( Non-longitudinal ) :  
 Annotated Compounds Spearman Correlation ( Non-longitudinal ):  1 
 Number of samples and KEGG Annotated Compounds Spearman Correlation ( Non-longitudinal ):  0.452381 
 HMDB Annotated Compounds and Number of samples Spearman Correlation ( Non-longitudinal ):  0.452381 
-
- Adult 
-Number of datasets per variable in correlation analysis ( Adult ) :  10 
-Annotated Compounds Spearman Correlation ( Adult ):  0.9757576 
-Number of samples and KEGG Annotated Compounds Spearman Correlation ( Adult ):  0.05454545 
-HMDB Annotated Compounds and Number of samples Spearman Correlation ( Adult ):  0.05454545 
